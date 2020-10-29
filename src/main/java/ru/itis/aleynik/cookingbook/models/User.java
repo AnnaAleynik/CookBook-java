@@ -1,4 +1,4 @@
-package ru.itis.aleynik.cookingbook.entities;
+package ru.itis.aleynik.cookingbook.models;
 
 import ru.itis.aleynik.cookingbook.dao.UserDAO;
 

@@ -1,6 +1,6 @@
 package ru.itis.aleynik.cookingbook.dao;
 
-import ru.itis.aleynik.cookingbook.entities.User;
+import ru.itis.aleynik.cookingbook.models.User;
 import ru.itis.aleynik.cookingbook.services.DBWorker;
 
 import java.sql.Connection;

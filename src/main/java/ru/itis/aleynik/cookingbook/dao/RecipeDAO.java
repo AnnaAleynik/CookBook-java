@@ -1,6 +1,6 @@
 package ru.itis.aleynik.cookingbook.dao;
 
-import ru.itis.aleynik.cookingbook.entities.*;
+import ru.itis.aleynik.cookingbook.models.*;
 import ru.itis.aleynik.cookingbook.services.DBWorker;
 
 import java.sql.Connection;
@@ -14,6 +14,9 @@ import java.util.Set;
 public class RecipeDAO {
 
     private Connection conn;
+    private UserDAO userDAO;
+    private TagDAO tagDAO;
+    private RecipeIngredientDAO riDAO;
 
     public RecipeDAO() {
         this.conn = DBWorker.getConn();
@@ -25,19 +28,27 @@ public class RecipeDAO {
 
     private Recipe getRecipeByResultSet(ResultSet set) throws SQLException {
         Recipe recipe;
-        String title = set.getString("title");
+        userDAO = new UserDAO();
+        tagDAO = new TagDAO();
+
+//        String title = set.getString("title");
+        int id = set.getInt("r_id");
         if (set.next()) {
             recipe = new Recipe(
-                    set.getInt("id"),
-                    title,
+                    id,
+                    set.getString("title"),
                     set.getString("description"),
-                    User.userById(set.getInt("user_id")),
-                    null,
-                    Tag.listTagsByRecipeTitle(title)
+                    userDAO.getUserById(set.getInt("user_id")),
+                    riDAO.getListByRecipe(id),
+                    tagDAO.listTagsByRecipe(id)
             );
         } else {
             recipe = new Recipe(-1, null, null, null, null, null);
         }
+
+        userDAO.destroy();
+        tagDAO.destroy();
+        riDAO.destroy();
         return recipe;
     }
 
@@ -52,16 +63,33 @@ public class RecipeDAO {
         return recipe;
     }
 
-    public int addRecipe(String title, String description, HashMap<Ingredient, String> map) throws SQLException {
-        String command = "INSERT INTO recipe (title, description) VALUES (?, ?)";
+    public int addRecipe(int user_id, String title, String description, LinkedList<Ingredient> list) throws SQLException {
+        String command = "INSERT INTO recipe (user_id, title, description) VALUES (?, ?, ?)";
         PreparedStatement st = conn.prepareStatement(command);
-        st.setString(1, title);
-        st.setString(2, description);
+        st.setInt(1, user_id);
+        st.setString(2, title);
+        st.setString(3, description);
         int res = st.executeUpdate();
-        addRecipeIngredient(getIdRecipeByTitle(title), map);
+        addRecipeIngredient(getIdRecipeByTitle(title), list);
         return res;
     }
 
+    public int addRecipeIngredient(int r_id, LinkedList<Ingredient> list) throws SQLException {
+        String command;
+        PreparedStatement st;
+        int res = 0;
+        for (Ingredient item: list) {
+            command = "INSERT INTO recipe_ingr (r_id, i_id, amount) VALUES (?, ?, ?)";
+            st = conn.prepareStatement(command);
+            st.setInt(1, r_id);
+            st.setInt(2, item.getI_id());
+            st.setString(3, item.getAmount());
+            res += st.executeUpdate();
+        }
+        return res;
+    }
+
+    /*
     public int addRecipeIngredient(int r_id, HashMap<Ingredient, String> map) throws SQLException {
         String command;
         PreparedStatement st;
@@ -78,7 +106,7 @@ public class RecipeDAO {
 //        map.forEach((k,v) -> );
         return res;
     }
-
+*/
 
     private int getIdRecipeByTitle(String title) throws SQLException {
         String command = "SELECT r_id FROM recipe WHERE title LIKE ?";
@@ -97,18 +125,4 @@ public class RecipeDAO {
         return getRecipeByResultSet(set);
     }
 
-
-/*
-    private Recipe getRecipeByTitle(String title) throws SQLException {
-        String command = "SELECT * FROM recipe WHERE title LIKE ?";
-        PreparedStatement st = conn.prepareStatement(command);
-        st.setString(1, title);
-        ResultSet set = st.executeQuery();
-        set.next();
-        return new Recipe(
-                set.getInt("id"),
-                set.getString("title"),
-                set.getString("description")
-                );
-    }*/
 }

@@ -18,7 +18,7 @@ public class User {
     }
 
     public static void main(String[] args) {
-        User user = User.userByEmail("as");
+        User user = new User("a", "a");
         System.out.println(user.name);
         System.out.println(user.email);
     }

@@ -6,9 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
-<%--<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>--%>
-<%--<t:mainLayout>--%>
-<%@include file="/WEB-INF/views/header.jsp" %>
+<%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<t:mainLayout>
 <div>Oops...</div>
 <div>Sorry, you can't do it from Edge(</div>
-<%@include file="/WEB-INF/views/footer.jsp" %>
+</t:mainLayout>

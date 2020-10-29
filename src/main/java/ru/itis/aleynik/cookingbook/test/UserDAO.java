@@ -1,6 +1,6 @@
 package ru.itis.aleynik.cookingbook.test;
 
-public class UserDAO {
+public class UserDAO extends Abstract{
     public int uid;
 
     public UserDAO() {

@@ -1,7 +1,7 @@
 package ru.itis.aleynik.cookingbook.services;
 
 import ru.itis.aleynik.cookingbook.dao.UserDAO;
-import ru.itis.aleynik.cookingbook.entities.User;
+import ru.itis.aleynik.cookingbook.models.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.sql.SQLException;
