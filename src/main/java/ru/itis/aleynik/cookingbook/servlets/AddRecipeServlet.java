@@ -54,6 +54,7 @@ public class AddRecipeServlet extends HttpServlet {
         int amount = Integer.parseInt(req.getParameter("amount"));
         String ing = "titleIng";
         String amountIngFrom = "amount";
+        System.out.println("amount" + amount);
         Ingredient ingredient;
         String amountIngTo;
         for (int i = 0; i < amount; i++) {
