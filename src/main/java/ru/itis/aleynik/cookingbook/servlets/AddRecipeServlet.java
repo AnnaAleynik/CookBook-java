@@ -40,8 +40,10 @@ public class AddRecipeServlet extends HttpServlet {
 
             if (title != null && description != null && !list.isEmpty()) {
 
-                recipeDAO.addRecipe(user.id, title, description, list);
+                int id = recipeDAO.addRecipe(user.id, title, description, list);
                 recipeDAO.destroy();
+
+                req.getSession().setAttribute("recipe_id", id);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -52,14 +54,15 @@ public class AddRecipeServlet extends HttpServlet {
     private void addtoList(LinkedList<Ingredient> list, HttpServletRequest req) throws SQLException {
         ingDAO = new IngredientDAO();
         int amount = Integer.parseInt(req.getParameter("amount"));
-        String ing = "titleIng";
+        String ing = "item";
         String amountIngFrom = "amount";
         System.out.println("amount" + amount);
         Ingredient ingredient;
         String amountIngTo;
-        for (int i = 0; i < amount; i++) {
+        for (int i = 1; i <= amount; i++) {
             ingredient = ingDAO.getIngByTitle(req.getParameter(ing + i));
             amountIngTo = req.getParameter(amountIngFrom + i);
+            System.out.println("amountIngTo " + amountIngTo);
             ingredient.setAmount(amountIngTo);
             list.add(ingredient);
         }

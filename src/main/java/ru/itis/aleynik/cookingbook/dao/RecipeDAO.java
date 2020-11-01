@@ -64,13 +64,14 @@ public class RecipeDAO {
     }
 
     public int addRecipe(int user_id, String title, String description, LinkedList<Ingredient> list) throws SQLException {
-        String command = "INSERT INTO recipe (user_id, title, description) VALUES (?, ?, ?)";
+        String command = "INSERT INTO recipe (user_id, title, description) VALUES (?, ?, ?) RETURNING r_id"; //returnung id
         PreparedStatement st = conn.prepareStatement(command);
         st.setInt(1, user_id);
         st.setString(2, title);
         st.setString(3, description);
-        int res = st.executeUpdate();
-        addRecipeIngredient(getIdRecipeByTitle(title), list);
+        ResultSet set = st.executeQuery();
+//        addRecipeIngredient(getIdRecipeByTitle(title), list);
+        int res = set.getInt("r_id");
         return res;
     }
 

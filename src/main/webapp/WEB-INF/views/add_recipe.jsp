@@ -4,7 +4,7 @@
     <div class="form-input">
         <form method="post">
             <div class="input-group mb-3">
-                <input type="text" class="form-control col-3" placeholder="Название рецепта">
+                <input type="text" class="form-control col-3" name="title" placeholder="Название рецепта">
             </div>
             <p>Ингрeдиенты</p>
             <div id="items">
