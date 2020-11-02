@@ -23,11 +23,15 @@ public class AddRecipeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf8");
+        resp.setContentType("text/html; charset=UTF-8");
         req.getRequestDispatcher("/WEB-INF/views/add_recipe.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf8");
+        resp.setContentType("text/html; charset=UTF-8");
         User user = (User) req.getSession().getAttribute("user");
         String title = req.getParameter("title");
         String description = req.getParameter("description");
@@ -56,13 +60,11 @@ public class AddRecipeServlet extends HttpServlet {
         int amount = Integer.parseInt(req.getParameter("amount"));
         String ing = "item";
         String amountIngFrom = "amount";
-        System.out.println("amount" + amount);
         Ingredient ingredient;
         String amountIngTo;
         for (int i = 1; i <= amount; i++) {
             ingredient = ingDAO.getIngByTitle(req.getParameter(ing + i));
             amountIngTo = req.getParameter(amountIngFrom + i);
-            System.out.println("amountIngTo " + amountIngTo);
             ingredient.setAmount(amountIngTo);
             list.add(ingredient);
         }

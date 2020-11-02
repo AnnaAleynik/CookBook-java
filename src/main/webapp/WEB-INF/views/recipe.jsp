@@ -7,11 +7,22 @@
             <header>
                 <h1 class="post-title text-center text-md-left">Курица в апельсиновом соусе</h1>
                 <hr class="m-0 d-none d-md-block">
-                <div class="recipe-author d-flex align-items-center py-2 text-right">
+                <div class="recipe-author d-flex justify-content-between py-2 text-right">
                     <div>
                         <small>Автор рецепта</small>
                         <a href="#"></a>
                     </div>
+                    <c:if test="${user_id == author}">
+                        <div>
+                            <small><a href="#">Редактировать</a></small>
+                            <small><a href="#">Удалить</a></small>
+                        </div>
+                    </c:if>
+                    <c:if test="${!(user_id == author)}">
+                        <div>
+                            <small><a href="#">Добавить в избранное</a></small>
+                        </div>
+                    </c:if>
                 </div>
             </header>
         </article>

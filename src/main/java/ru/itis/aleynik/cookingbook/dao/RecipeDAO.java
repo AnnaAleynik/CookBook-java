@@ -71,7 +71,13 @@ public class RecipeDAO {
         st.setString(3, description);
         ResultSet set = st.executeQuery();
 //        addRecipeIngredient(getIdRecipeByTitle(title), list);
-        int res = set.getInt("r_id");
+
+        int res = -1;
+        if (set.next()) {
+            res = set.getInt("r_id");
+        }
+
+        addRecipeIngredient(res, list);
         return res;
     }
 
@@ -79,7 +85,7 @@ public class RecipeDAO {
         String command;
         PreparedStatement st;
         int res = 0;
-        for (Ingredient item: list) {
+        for (Ingredient item : list) {
             command = "INSERT INTO recipe_ingr (r_id, i_id, amount) VALUES (?, ?, ?)";
             st = conn.prepareStatement(command);
             st.setInt(1, r_id);

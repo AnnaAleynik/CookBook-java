@@ -5,7 +5,7 @@
 <head>
     <title>Книга рецептов</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/bootstrap.min.css"/>
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/main-page-style.css"/>
@@ -51,7 +51,7 @@
         </c:if>
         <c:if test="${!(user == null)}">
             <a class="btn btn-outline-info ml-sm-1" href="<c:url value="/signin"/>">Профиль</a>
-            <a class="btn btn-outline-info ml-sm-1" href="<c:url value="/signin"/>">Выйти</a>
+            <a class="btn btn-outline-info ml-sm-1" href="<c:url value="/logout"/>">Выйти</a>
         </c:if>
         <li class="nav-item">
             <form class="form-inline my-2 my-lg-0  ml-sm-2">
