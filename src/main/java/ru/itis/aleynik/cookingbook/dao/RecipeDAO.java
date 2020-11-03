@@ -53,6 +53,7 @@ public class RecipeDAO {
         return recipe;
     }
 
+
     public Recipe getRecipeByTitle(String title) throws SQLException {
         String command = "SELECT r_id, user_id, description FROM recipe WHERE title LIKE ?";
         PreparedStatement st = conn.prepareStatement(command);
@@ -133,4 +134,27 @@ public class RecipeDAO {
         return getRecipeByResultSet(set);
     }
 
+    public LinkedList<Recipe> getListFavByUser(int id) throws SQLException{
+        LinkedList<Recipe> list = new LinkedList<>();
+        String command = "SELECT r_id FROM userp_recipe WHERE u_id=?";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setInt(1, id);
+        ResultSet set = st.executeQuery();
+        while (set.next()) {
+            list.add(getRecipeById(set.getInt("r_id")));
+        }
+        return list;
+    }
+
+    public LinkedList<Recipe> getListAddedByUser(int id) throws SQLException {
+        LinkedList<Recipe> list = new LinkedList<>();
+        String command = "SELECT r_id FROM recipe WHERE user_id=?";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setInt(1, id);
+        ResultSet set = st.executeQuery();
+        while(set.next()) {
+            list.add(getRecipeById(set.getInt("r_id")));
+        }
+        return list;
+    }
 }

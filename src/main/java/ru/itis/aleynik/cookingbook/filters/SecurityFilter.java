@@ -15,7 +15,9 @@ public class SecurityFilter extends HttpFilter {
 
     protected final String[] protectedPaths = {
             "/profile",
-            "/add-recipe"
+            "/add-recipe",
+            "/my-recipes",
+            "/favorite"
     };
 
     @Override

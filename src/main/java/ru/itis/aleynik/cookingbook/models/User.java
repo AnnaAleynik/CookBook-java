@@ -14,8 +14,8 @@ public class User {
     public String login;
     public String email;
     public String password;
-    public LinkedList<Recipe> favorite_recipe;
-    public LinkedList<Recipe> added_recipe;
+    public LinkedList<Recipe> favoriteRecipes;
+    public LinkedList<Recipe> addedRecipes;
 
     public static User userById(int id) throws SQLException {
         userDAO = new UserDAO();
@@ -30,13 +30,13 @@ public class User {
         this.password = password;
     }
 
-    public User(int id, String login, String email, String password, LinkedList<Recipe> favorite_recipe, LinkedList<Recipe> added_recipe) {
+    public User(int id, String login, String email, String password, LinkedList<Recipe> favoriteRecipe, LinkedList<Recipe> addedRecipe) {
         this.id = id;
         this.login = login;
         this.email = email;
         this.password = password;
-        this.favorite_recipe = favorite_recipe;
-        this.added_recipe = added_recipe;
+        this.favoriteRecipes = favoriteRecipe;
+        this.addedRecipes = addedRecipe;
     }
 
     public int getId() {
@@ -71,20 +71,20 @@ public class User {
         this.password = password;
     }
 
-    public LinkedList<Recipe> getFavorite_recipe() {
-        return favorite_recipe;
+    public void setFavoriteRecipes(LinkedList<Recipe> favoriteRecipes) {
+        this.favoriteRecipes = favoriteRecipes;
     }
 
-    public void setFavorite_recipe(LinkedList<Recipe> favorite_recipe) {
-        this.favorite_recipe = favorite_recipe;
+    public void setAddedRecipes(LinkedList<Recipe> addedRecipes) {
+        this.addedRecipes = addedRecipes;
     }
 
-    public LinkedList<Recipe> getAdded_recipe() {
-        return added_recipe;
+    public LinkedList<Recipe> getFavoriteRecipes() {
+        return favoriteRecipes;
     }
 
-    public void setAdded_recipe(LinkedList<Recipe> added_recipe) {
-        this.added_recipe = added_recipe;
+    public LinkedList<Recipe> getAddedRecipes() {
+        return addedRecipes;
     }
 
     @Override
@@ -97,6 +97,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, email, password, favorite_recipe, added_recipe);
+        return Objects.hash(id, login, email, password, favoriteRecipes, addedRecipes);
     }
 }

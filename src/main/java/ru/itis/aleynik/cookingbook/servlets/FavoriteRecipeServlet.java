@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/my-recipes")
-public class MyRecipeServlet extends HttpServlet {
-
+@WebServlet("/favorite")
+public class FavoriteRecipeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
@@ -23,6 +22,6 @@ public class MyRecipeServlet extends HttpServlet {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        req.getRequestDispatcher("/WEB-INF/views/my-recipes.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/favorite-recipes.jsp").forward(req, resp);
     }
 }

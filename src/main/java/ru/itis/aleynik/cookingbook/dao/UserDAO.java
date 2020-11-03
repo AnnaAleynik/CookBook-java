@@ -11,6 +11,7 @@ import java.sql.SQLException;
 public class UserDAO {
 
     private Connection conn;
+    private RecipeDAO recipeDAO;
 
     public UserDAO() {
         this.conn = DBWorker.getConn();
@@ -43,13 +44,25 @@ public class UserDAO {
         } else {
             user = new User(-1, null, null, null);
         }
+
+//        addRecipes(user);
         return user;
     }
 
     public User getUserByEmail(String email) throws SQLException {
         ResultSet set = getByEmail(email);
-        return getUserByResultSet(set);
+        User user = getUserByResultSet(set);
+
+        return user;
     }
+
+    public void addRecipes(User user) throws SQLException {
+        recipeDAO = new RecipeDAO();
+        user.setFavoriteRecipes(recipeDAO.getListFavByUser(user.id));
+        user.setAddedRecipes(recipeDAO.getListAddedByUser(user.id));
+        recipeDAO.destroy();
+    }
+
 
     private ResultSet getByEmail(String email) throws SQLException {
 //        String command = "SELECT * FROM Users WHERE email LIKE ?";

@@ -1,6 +1,6 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <t:mainLayout>
     <div class="container mt-md-4 bg-white">
         <article class="recipe-page py-2">
@@ -29,23 +29,23 @@
                         </div>
                     </c:if>
                 </div>
-
-                <div class="card" style="width: 18rem;">
-                    <ul class="list-group list-group-flush">
-                        <c:forEach var="item" items="${recipe.getIngredients()}">
-                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                <c:out value="${item.getTitle()}"/>
-<%--                                <span class="badge badge-info">${item.getAmount()}</span>--%>
-                                <span><c:out value="${item.getAmount()}"/></span>
-                            </li>
-                        </c:forEach>
-                    </ul>
-                </div>
-
-                <div class="card">
-                    <p class="text-left"><c:out value="${recipe.getDescription()}"/></p>
-                </div>
             </header>
+
+            <div class="card" style="width: 18rem;">
+                <ul class="list-group list-group-flush">
+                    <c:forEach var="item" items="${recipe.getIngredients()}">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <c:out value="${item.getTitle()}"/>
+                                <%--                                <span class="badge badge-info">${item.getAmount()}</span>--%>
+                            <span><c:out value="${item.getAmount()}"/></span>
+                        </li>
+                    </c:forEach>
+                </ul>
+            </div>
+
+            <div class="card">
+                <p class="text-left"><c:out value="${recipe.getDescription()}"/></p>
+            </div>
         </article>
 
     </div>
