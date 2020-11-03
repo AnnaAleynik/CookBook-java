@@ -15,7 +15,6 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
-        System.out.println(user.id);
         req.getRequestDispatcher("WEB-INF/views/profile.jsp").forward(req, resp);
     }
 }

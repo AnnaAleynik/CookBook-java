@@ -29,11 +29,12 @@ public class RecipeDAO {
     private Recipe getRecipeByResultSet(ResultSet set) throws SQLException {
         Recipe recipe;
         userDAO = new UserDAO();
+        riDAO = new RecipeIngredientDAO();
         tagDAO = new TagDAO();
 
 //        String title = set.getString("title");
-        int id = set.getInt("r_id");
         if (set.next()) {
+            int id = set.getInt("r_id");
             recipe = new Recipe(
                     id,
                     set.getString("title"),
@@ -125,7 +126,7 @@ public class RecipeDAO {
     }
 
     public Recipe getRecipeById(int id) throws SQLException {
-        String command = "SELECT r_id FROM recipe WHERE id LIKE ?";
+        String command = "SELECT r_id, title, description, user_id FROM recipe WHERE r_id = ?";
         PreparedStatement st = conn.prepareStatement(command);
         st.setInt(1, id);
         ResultSet set = st.executeQuery();

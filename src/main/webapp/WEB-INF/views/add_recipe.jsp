@@ -1,28 +1,33 @@
-<%@page contentType="text/html;charset=UTF-8" language="java" %>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <t:mainLayout>
-    <div class="form-input">
-        <form method="post">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control col-3" name="title" placeholder="Название рецепта">
-            </div>
-            <p>Ингрeдиенты</p>
-            <div id="items">
-
-                <div class="input-group mb-2"><input class="col-2 mr-2" type="text" name="item1"><input class="col-1"
-                                                                                                        type="text"
-                                                                                                        name="amount1">
+    <div class="container mt-md-4 bg-white">
+        <!-- <%--        <article class="recipe-page col-10">--%> -->
+        <div class="form-input">
+            <form method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="title" placeholder="Название рецепта">
                 </div>
-                <div><input type="text" name="item2" size="45"><input type="text" name="amount2" size="15"></div>
-                <div><input type="text" name="item3" size="45"><input type="text" name="amount3" size="15"></div>
-                <input type="button" value="+" id="add" size="45">
-            </div>
-            <label for="description">Рецепт</label>
-            <textarea class="form-control" id="description" name="description" rows="3"></textarea>
-            <input hidden type="number" name="amount" id="amount" value="3">
-            <button type="submit" class="btn btn-primary">Добавить</button>
-        </form>
+                <div id="items">
+                    <div class="input-group mb-2 mt-2">
+                        <input class="form-control col-4 mr-3 form-control" type="text" name="item1"
+                               placeholder="Ингредиент">
+                        <input
+                                class="col-2 form-control"
+                                type="text"
+                                name="amount1" placeholder="Количество">
+                    </div>
+                    <input type="button" class="btn btn-outline-success btn-sm" value="+" id="add">
+                </div>
+                <textarea class="form-control mt-3" id="description" name="description" rows="3"
+                          placeholder="Вводите рецепт..."></textarea>
+                <input hidden type="number" name="amount" id="amount" value="1">
+
+                <button type="submit" class="btn btn-outline-success mt-5">Добавить</button>
+            </form>
 
 
+        </div>
+        <!-- <%--        </article>--%> -->
     </div>
 </t:mainLayout>

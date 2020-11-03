@@ -1,5 +1,6 @@
 <%@tag description="Default Layout Tag" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +14,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
-    <a class="navbar-brand" href="<c:url value="/"/>">
+    <a class="navbar-brand" href="<c:url value="/home"/>">
         <img src="${pageContext.request.contextPath}/static/img/icon-cooking.png" width="30" height="30"
              class="d-inline-block align-top" alt="" loading="lazy">
         Книга рецептов
@@ -50,7 +51,7 @@
             </li>
         </c:if>
         <c:if test="${!(user == null)}">
-            <a class="btn btn-outline-info ml-sm-1" href="<c:url value="/signin"/>">Профиль</a>
+            <a class="btn btn-outline-info ml-sm-1" href="<c:url value="/profile"/>">Профиль</a>
             <a class="btn btn-outline-info ml-sm-1" href="<c:url value="/logout"/>">Выйти</a>
         </c:if>
         <li class="nav-item">

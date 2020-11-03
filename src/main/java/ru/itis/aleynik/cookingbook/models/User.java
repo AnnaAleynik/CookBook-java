@@ -39,6 +39,54 @@ public class User {
         this.added_recipe = added_recipe;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public LinkedList<Recipe> getFavorite_recipe() {
+        return favorite_recipe;
+    }
+
+    public void setFavorite_recipe(LinkedList<Recipe> favorite_recipe) {
+        this.favorite_recipe = favorite_recipe;
+    }
+
+    public LinkedList<Recipe> getAdded_recipe() {
+        return added_recipe;
+    }
+
+    public void setAdded_recipe(LinkedList<Recipe> added_recipe) {
+        this.added_recipe = added_recipe;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -48,6 +48,7 @@ public class AddRecipeServlet extends HttpServlet {
                 recipeDAO.destroy();
 
                 req.getSession().setAttribute("recipe_id", id);
+                resp.sendRedirect(getServletContext().getContextPath() + "/recipe/" + id);
             }
         } catch (SQLException ex) {
             ex.printStackTrace();

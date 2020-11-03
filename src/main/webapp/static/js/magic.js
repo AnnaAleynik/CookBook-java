@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-    item = 4;
+    item = 3;
 
     function addIngredient() {
         div = document.getElementById("items");
-        newitem = "<input type=\"text\" name=\"item" + item + "\"size=\"45\">";
-        newitem += "<input type=\"text\" name=\"amount" + item + "\"size=\"15\">";
+        newitem = "<div class=\"input-group mb-2 mt-2\">";
+        newitem += "<input class=\"form-control col-4 mr-3 form-control\" type=\"text\" name=\"item" + item + "\" placeholder=\"Ингредиент\">";
+        newitem += "<input class=\"col-2 form-control\" type=\"text\" name=\"amount" + item + "\" placeholder=\"Количество\"></div>";
         newnode = document.createElement("div");
         newnode.innerHTML = newitem;
         div.insertBefore(newnode, button);
         amount = document.getElementById("amount");
         amount.setAttribute("value", item);
-        console.log(amount.getAttribute("value"));
         item++;
     }
 

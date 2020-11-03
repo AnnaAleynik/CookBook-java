@@ -5,24 +5,45 @@
     <div class="container mt-md-4 bg-white">
         <article class="recipe-page py-2">
             <header>
-                <h1 class="post-title text-center text-md-left">Курица в апельсиновом соусе</h1>
+                <h2 class="post-title text-center text-md-left">${recipe.getTitle()}</h2>
                 <hr class="m-0 d-none d-md-block">
                 <div class="recipe-author d-flex justify-content-between py-2 text-right">
                     <div>
                         <small>Автор рецепта</small>
-                        <a href="#"></a>
+                        <a href="#"><c:out value="${recipe.getAuthor().getLogin()}"/></a>
                     </div>
-                    <c:if test="${user_id == author}">
+                    <c:if test="${user.getId() == recipe.getAuthor().getId()}">
                         <div>
                             <small><a href="#">Редактировать</a></small>
                             <small><a href="#">Удалить</a></small>
                         </div>
                     </c:if>
-                    <c:if test="${!(user_id == author)}">
+                    <c:if test="${!(user.getId() == recipe.getAuthor().getId()) && (user != null)}">
                         <div>
                             <small><a href="#">Добавить в избранное</a></small>
                         </div>
                     </c:if>
+                    <c:if test="${user == null}">
+                        <div>
+                            <small><a href="<c:url value="/signin"/>">Войдите</a>, чтобы сохранить рецепт!</small>
+                        </div>
+                    </c:if>
+                </div>
+
+                <div class="card" style="width: 18rem;">
+                    <ul class="list-group list-group-flush">
+                        <c:forEach var="item" items="${recipe.getIngredients()}">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <c:out value="${item.getTitle()}"/>
+<%--                                <span class="badge badge-info">${item.getAmount()}</span>--%>
+                                <span><c:out value="${item.getAmount()}"/></span>
+                            </li>
+                        </c:forEach>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <p class="text-left"><c:out value="${recipe.getDescription()}"/></p>
                 </div>
             </header>
         </article>
