@@ -14,8 +14,8 @@ import java.io.IOException;
 public class SecurityFilter extends HttpFilter {
 
     protected final String[] protectedPaths = {
-            "/profile"
-//            "/add-recipe"
+            "/profile",
+            "/add-recipe"
     };
 
     @Override
