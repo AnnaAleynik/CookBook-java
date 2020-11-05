@@ -20,36 +20,65 @@ import java.util.Arrays;
 public class RecipeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String uri = req.getRequestURI();
+        String tale = req.getPathInfo();
+//        System.out.println(tale);
+        String[] path = tale.split("/");
+//        System.out.println(Arrays.toString(path));
+//        System.out.println(req.getParameter("id")); ///edit?id=12 -> 12
 
-        int r_id = getId(req.getRequestURI());
+        int r_id = getId(path[1]);
+//        System.out.println(r_id);
+        String action = "";
+        if (path.length > 2) {
+            action = path[2];
+        }
+
+//        int r_id = getId(req.getRequestURI());
         if (r_id != -1) {
             try {
                 RecipeDAO recipeDAO = new RecipeDAO();
                 Recipe recipe = recipeDAO.getRecipeById(r_id);
                 if (recipe != null && recipe.getId() != -1) {
                     req.setAttribute("recipe", recipe);
-                } else {
-                    req.getRequestDispatcher("/WEB-INF/views/error404.jsp").forward(req, resp);
                 }
-
+                switch (action) {
+                    case "":
+                        show(req, resp, recipe);
+                        break;
+                    case "edit":
+                        getServletContext().getRequestDispatcher("/WEB-INF/views/edit_recipe.jsp").forward(req, resp);
+                        break;
+                }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+
+
         } else {
+            req.getRequestDispatcher("/WEB-INF/views/error404.jsp").forward(req, resp);
         }
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+    }
+
+    private void show(HttpServletRequest req, HttpServletResponse resp, Recipe r) throws ServletException, IOException {
+
         getServletContext().getRequestDispatcher("/WEB-INF/views/recipe.jsp").forward(req, resp);
 
     }
 
-    private int getId(String uri) throws NumberFormatException {
-        String[] arr = uri.split("/");
+
+    private int getId(String arr) throws NumberFormatException {
         int res = -1;
-//        System.out.println(Arrays.toString(arr));
-//        String last = arr[arr.length-1].trim().replaceAll("[^0-9]", "");
-//        System.out.println(last);
-//        int res = Integer.parseInt(last);
         try {
-            res = Integer.valueOf(arr[arr.length - 1]);
+            res = Integer.valueOf(arr);
         } catch (NumberFormatException e) {
             return res;
         }

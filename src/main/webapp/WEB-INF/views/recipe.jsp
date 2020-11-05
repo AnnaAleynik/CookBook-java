@@ -5,7 +5,7 @@
     <div class="container mt-md-4 bg-white">
         <article class="recipe-page py-2">
             <header>
-                <h2 class="post-title text-center text-md-left">${recipe.getTitle()}</h2>
+                <h2 class="post-title text-center text-md-left"><c:out value="${recipe.getTitle()}"/></h2>
                 <hr class="m-0 d-none d-md-block">
                 <div class="recipe-author d-flex justify-content-between py-2 text-right">
                     <div>
@@ -33,10 +33,12 @@
 
             <div class="card" style="width: 18rem;">
                 <ul class="list-group list-group-flush">
+                    <c:set var="amount" value="${0}"/>
                     <c:forEach var="item" items="${recipe.getIngredients()}">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <c:out value="${item.getTitle()}"/>
                                 <%--                                <span class="badge badge-info">${item.getAmount()}</span>--%>
+                            <span>${amount = amount + 1}</span>
                             <span><c:out value="${item.getAmount()}"/></span>
                         </li>
                     </c:forEach>
