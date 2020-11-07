@@ -157,4 +157,22 @@ public class RecipeDAO {
         }
         return list;
     }
+
+    public boolean updateRecipeById(int r_id, String title, String description) throws SQLException {
+//        language=SQL
+        String command = "UPDATE recipe set title=?, description=? where r_id=?";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setString(1, title);
+        st.setString(2, description);
+        st.setInt(3, r_id);
+        return st.execute();
+    }
+
+    public boolean deleteRecipeById(int r_id) throws SQLException{
+//        language=SQL
+        String command = "DELETE FROM recipe WHERE r_id=?";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setInt(1, r_id);
+        return st.execute();
+    }
 }

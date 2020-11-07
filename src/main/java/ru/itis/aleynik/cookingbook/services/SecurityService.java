@@ -28,6 +28,7 @@ public class SecurityService {
         if (email.equals(user.email) && password.equals(user.password)){
             req.getSession().setAttribute("email", email);
             req.getSession().setAttribute("login", user.login);
+            req.getSession().setAttribute("user_id", user.getId());
             req.getSession().setAttribute("user", user);
             return true;
         }

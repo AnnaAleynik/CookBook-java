@@ -8,6 +8,17 @@
                 <div class="input-group">
                     <input type="text" class="form-control" name="title" placeholder="Название рецепта">
                 </div>
+                <div class="form-group">
+                        <%--                    <label for="exampleFormControlSelect2">Example multiple select</label>--%>
+                    <input type="text" placeholder="Search.." id="tagInput" onkeyup="filterFunction()">
+                    <select multiple class="form-control" id="tagChoice">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select>
+                </div>
                 <div id="items">
                     <div class="input-group mb-2 mt-2">
                         <input class="form-control col-4 mr-3 form-control" type="text" name="item1"

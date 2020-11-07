@@ -14,14 +14,17 @@
                     </div>
                     <c:if test="${user.getId() == recipe.getAuthor().getId()}">
                         <div>
-                            <small><a href="#">Редактировать</a></small>
-                            <small><a href="#">Удалить</a></small>
+                            <small><a href="<c:url value="/recipe/${recipe.getId()}/edit"/>">Редактировать</a></small>
+                            <small><a href="<c:url value="/recipe/${recipe.getId()}/delete"/>">Удалить</a></small>
                         </div>
                     </c:if>
                     <c:if test="${!(user.getId() == recipe.getAuthor().getId()) && (user != null)}">
-                        <div>
-                            <small><a href="#">Добавить в избранное</a></small>
-                        </div>
+                        <c:if test="${}">
+                            <div>
+                                <small><a href="<c:url value="/recipe/${recipe.getId()}/delete-fav"/>">Удалить из
+                                    избранного</a></small>
+                            </div>
+                        </c:if>
                     </c:if>
                     <c:if test="${user == null}">
                         <div>

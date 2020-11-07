@@ -74,7 +74,7 @@ public class UserDAO {
         return set;
     }
 
-    public User getUserById(int id) throws SQLException{
+    public User getUserById(int id) throws SQLException {
         String command = "SELECT * FROM userp WHERE id = ? ";
         PreparedStatement st = conn.prepareStatement(command);
         st.setInt(1, id);
@@ -82,4 +82,26 @@ public class UserDAO {
         return getUserByResultSet(set);
     }
 
+    public boolean addFavRecipes(int id, int r_id) throws SQLException {
+//        language=SQL
+        String command = "INSERT INTO userp_recipe (u_id, r_id) VALUES (?, ?)";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setInt(1, id);
+        st.setInt(2, r_id);
+        if (st.executeUpdate() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean containsFav(int id, int r_id) throws SQLException {
+//        language=SQL
+        String command = "SELECT 1 AS res FROM userp_recipe WHERE u_id = ? AND r_id = ?";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setInt(1, id);
+        st.setInt(2, r_id);
+
+        return st.executeQuery().next();
+    }
 }

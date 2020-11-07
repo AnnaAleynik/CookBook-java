@@ -40,7 +40,7 @@ public class AddRecipeServlet extends HttpServlet {
         LinkedList<Ingredient> list = new LinkedList<>();
         try {
             putToMap(map, req);
-            addtoList(list, req);
+            addToList(list, req);
 
             if (title != null && description != null && !list.isEmpty()) {
 
@@ -56,7 +56,7 @@ public class AddRecipeServlet extends HttpServlet {
         }
     }
 
-    private void addtoList(LinkedList<Ingredient> list, HttpServletRequest req) throws SQLException {
+    private void addToList(LinkedList<Ingredient> list, HttpServletRequest req) throws SQLException {
         ingDAO = new IngredientDAO();
         int amount = Integer.parseInt(req.getParameter("amount"));
         String ing = "item";

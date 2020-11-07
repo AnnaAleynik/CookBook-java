@@ -99,4 +99,6 @@ public class User {
     public int hashCode() {
         return Objects.hash(id, login, email, password, favoriteRecipes, addedRecipes);
     }
+
+//    public LinkedList<Integer> getFavoriteRecipesId() { }
 }
