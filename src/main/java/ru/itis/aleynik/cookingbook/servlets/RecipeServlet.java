@@ -67,7 +67,6 @@ public class RecipeServlet extends HttpServlet {
                 e.printStackTrace();
             }
 
-
         } else {
             req.getRequestDispatcher("/WEB-INF/views/error404.jsp").forward(req, resp);
         }

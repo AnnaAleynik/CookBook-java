@@ -66,7 +66,7 @@ public class RecipeDAO {
         return recipe;
     }
 
-    public int addRecipe(int user_id, String title, String description, LinkedList<Ingredient> list) throws SQLException {
+    public int addRecipe(int user_id, String title, String description, LinkedList<Ingredient> list, LinkedList<Tag> tags) throws SQLException {
         String command = "INSERT INTO recipe (user_id, title, description) VALUES (?, ?, ?) RETURNING r_id"; //returnung id
         PreparedStatement st = conn.prepareStatement(command);
         st.setInt(1, user_id);
@@ -81,7 +81,24 @@ public class RecipeDAO {
         }
 
         addRecipeIngredient(res, list);
+        addRecipeTag(res, tags);
         return res;
+    }
+
+    private int addRecipeTag(int r_id, LinkedList<Tag> tags) throws SQLException {
+        String command;
+        PreparedStatement st;
+        int res = 0;
+
+        for (Tag tag : tags) {
+            command = "INSERT INTO recipe_tag (r_id, t_id) VALUES (?, ?)";
+            st = conn.prepareStatement(command);
+            st.setInt(1, r_id);
+            st.setInt(2, tag.getId());
+            res += st.executeUpdate();
+        }
+        return res;
+
     }
 
     public int addRecipeIngredient(int r_id, LinkedList<Ingredient> list) throws SQLException {

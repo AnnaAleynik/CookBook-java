@@ -14,7 +14,7 @@
         <div><a href="<c:url value="/favorite"/>" class="btn btn-outline-secondary mt-md-2">Избранные рецепты</a></div>
         <div><a href="<c:url value="/add-recipe"/>" class="btn btn-outline-success  mt-md-2">Добавить свой рецепт</a>
         </div>
-        <div><a href="<c:url value="/my-recipes"/>" class="btn btn-outline-secondary  mt-md-2">Мои рецепты</a></div>
+        <div><a href="<c:url value="/recipes/my"/>" class="btn btn-outline-secondary  mt-md-2">Мои рецепты</a></div>
 
 
     </div>

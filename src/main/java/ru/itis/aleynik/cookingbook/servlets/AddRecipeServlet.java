@@ -45,13 +45,15 @@ public class AddRecipeServlet extends HttpServlet {
         HashMap<Ingredient, String> map = new HashMap();
         LinkedList<Ingredient> list = new LinkedList<>();
 //        LinkedList<Tag> tags = getListTags(req.getParameter("tags"));
+        LinkedList<Tag> tags = new LinkedList<>();
         try {
 //            putToMap(map, req);
             addToList(list, req);
+            addTags(tags, req);
 
-            if (title != null && description != null && !list.isEmpty()) {
+            if (title != null && description != null && !list.isEmpty() && !tags.isEmpty()) {
 
-                int id = recipeDAO.addRecipe(user.id, title, description, list);
+                int id = recipeDAO.addRecipe(user.id, title, description, list, tags);
                 recipeDAO.destroy();
 
                 req.getSession().setAttribute("recipe_id", id);
@@ -63,14 +65,27 @@ public class AddRecipeServlet extends HttpServlet {
         }
     }
 
+    private void addTags(LinkedList<Tag> tags, HttpServletRequest req) throws SQLException{
+        tagDAO = new TagDAO();
+        int amountTag = Integer.parseInt(req.getParameter("amountTag"));
+        String tagStr = "tag";
+        String amountTagFrom = "amountTag";
+        Tag tag;
+        for (int i = 1; i <= amountTag; i++) {
+            tag = tagDAO.getTagByTitle(req.getParameter(tagStr + i));
+            tags.add(tag);
+        }
+        tagDAO.destroy();
+    }
+
 //    private LinkedList<Tag> getListTags(String tags) {   }
 
 
     private void addToList(LinkedList<Ingredient> list, HttpServletRequest req) throws SQLException {
         ingDAO = new IngredientDAO();
-        int amount = Integer.parseInt(req.getParameter("amount"));
+        int amount = Integer.parseInt(req.getParameter("amountIng"));
         String ing = "item";
-        String amountIngFrom = "amount";
+        String amountIngFrom = "amountIng";
         Ingredient ingredient;
         String amountIngTo;
         for (int i = 1; i <= amount; i++) {

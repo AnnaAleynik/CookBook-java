@@ -10,7 +10,8 @@
                 <div class="recipe-author d-flex justify-content-between py-2 text-right">
                     <div>
                         <small>Автор рецепта</small>
-                        <a href="#"><c:out value="${recipe.getAuthor().getLogin()}"/></a>
+                        <a href="<c:url value="/recipes/user?u=${recipe.getAuthor().getId()}"/>"><c:out
+                                value="${recipe.getAuthor().getLogin()}"/></a>
                     </div>
                     <c:if test="${user.getId() == recipe.getAuthor().getId()}">
                         <div>
@@ -19,12 +20,12 @@
                         </div>
                     </c:if>
                     <c:if test="${!(user.getId() == recipe.getAuthor().getId()) && (user != null)}">
-<%--                        <c:if test="${}">--%>
-                            <div>
-                                <small><a href="<c:url value="/recipe/${recipe.getId()}/delete-fav"/>">Удалить из
-                                    избранного</a></small>
-                            </div>
-<%--                        </c:if>--%>
+                        <%--                        <c:if test="${}">--%>
+                        <div>
+                            <small><a href="<c:url value="/recipe/${recipe.getId()}/delete-fav"/>">Удалить из
+                                избранного</a></small>
+                        </div>
+                        <%--                        </c:if>--%>
                     </c:if>
                     <c:if test="${user == null}">
                         <div>
@@ -34,14 +35,19 @@
                 </div>
             </header>
 
+            <div>
+                <ul class="list-group list-group-horizontal mt-2 mb-2">
+                    <c:forEach var="item" items="${recipe.getTags()}">
+                        <li class="list-group-item mr-2">${item.getTitle()}</li>
+                    </c:forEach>
+                </ul>
+            </div>
+
             <div class="card" style="width: 18rem;">
                 <ul class="list-group list-group-flush">
-                    <c:set var="amount" value="${0}"/>
                     <c:forEach var="item" items="${recipe.getIngredients()}">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <c:out value="${item.getTitle()}"/>
-                                <%--                                <span class="badge badge-info">${item.getAmount()}</span>--%>
-                            <span>${amount = amount + 1}</span>
                             <span><c:out value="${item.getAmount()}"/></span>
                         </li>
                     </c:forEach>
