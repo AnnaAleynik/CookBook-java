@@ -19,12 +19,12 @@
                         </div>
                     </c:if>
                     <c:if test="${!(user.getId() == recipe.getAuthor().getId()) && (user != null)}">
-                        <c:if test="${}">
+<%--                        <c:if test="${}">--%>
                             <div>
                                 <small><a href="<c:url value="/recipe/${recipe.getId()}/delete-fav"/>">Удалить из
                                     избранного</a></small>
                             </div>
-                        </c:if>
+<%--                        </c:if>--%>
                     </c:if>
                     <c:if test="${user == null}">
                         <div>

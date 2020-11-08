@@ -1,5 +1,7 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags" %>
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <t:mainLayout>
     <div class="container mt-md-4 bg-white">
         <!-- <%--        <article class="recipe-page col-10">--%> -->
@@ -11,12 +13,10 @@
                 <div class="form-group">
                         <%--                    <label for="exampleFormControlSelect2">Example multiple select</label>--%>
                     <input type="text" placeholder="Search.." id="tagInput" onkeyup="filterFunction()">
-                    <select multiple class="form-control" id="tagChoice">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                    <select multiple class="form-control" id="tagChoice" name="tags">
+                        <c:forEach var="item" items="${allTags}">
+                            <option><c:out value="${item.getTitle()}"/></option>
+                        </c:forEach>
                     </select>
                 </div>
                 <div id="items">

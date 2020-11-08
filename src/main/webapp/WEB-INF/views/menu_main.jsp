@@ -23,7 +23,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <button type="button" class="btn btn-outline-info col-2 align-self-start mr-1 mb-2">рецепт дня</button>
+            <a href="<c:url value="/day-recipe"/>" class="btn btn-outline-info col-2 align-self-start mr-1 mb-2">рецепт дня</a>
             <button type="button" class="btn btn-outline-info col-2 align-self-start ml-1 mb-2">меню дня</button>
         </div>
     </div>

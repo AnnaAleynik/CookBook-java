@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Set;
@@ -174,5 +175,28 @@ public class RecipeDAO {
         PreparedStatement st = conn.prepareStatement(command);
         st.setInt(1, r_id);
         return st.execute();
+    }
+
+    public ArrayList<Integer> getAllId() throws SQLException{
+//        language=SQL
+        ArrayList<Integer> id = new ArrayList<>();
+        String command = "SELECT r_id FROM recipe";
+        PreparedStatement st = conn.prepareStatement(command);
+        ResultSet set = st.executeQuery();
+        while (set.next()) {
+            id.add(set.getInt("r_id"));
+        }
+        return id;
+    }
+
+    public int getRandId() throws SQLException {
+//        language=SQL
+        String command = "SELECT r_id FROM recipe ORDER BY random() limit 1";
+        PreparedStatement st = conn.prepareStatement(command);
+        ResultSet set = st.executeQuery();
+        if (set.next()) {
+            return set.getInt("r_id");
+        }
+        return -1;
     }
 }

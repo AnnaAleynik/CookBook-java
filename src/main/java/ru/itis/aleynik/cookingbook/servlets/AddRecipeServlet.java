@@ -2,7 +2,9 @@ package ru.itis.aleynik.cookingbook.servlets;
 
 import ru.itis.aleynik.cookingbook.dao.IngredientDAO;
 import ru.itis.aleynik.cookingbook.dao.RecipeDAO;
+import ru.itis.aleynik.cookingbook.dao.TagDAO;
 import ru.itis.aleynik.cookingbook.models.Ingredient;
+import ru.itis.aleynik.cookingbook.models.Tag;
 import ru.itis.aleynik.cookingbook.models.User;
 
 import javax.servlet.ServletException;
@@ -18,11 +20,15 @@ import java.util.LinkedList;
 @WebServlet("/add-recipe")
 public class AddRecipeServlet extends HttpServlet {
 
-    private RecipeDAO recipeDAO = new RecipeDAO();
+    private final RecipeDAO recipeDAO = new RecipeDAO();
     private IngredientDAO ingDAO = new IngredientDAO();
+    private TagDAO tagDAO = new TagDAO();
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LinkedList<Tag> allTags = getAllTags();
+        req.setAttribute("allTags", allTags);
         req.setCharacterEncoding("utf8");
         resp.setContentType("text/html; charset=UTF-8");
         req.getRequestDispatcher("/WEB-INF/views/add_recipe.jsp").forward(req, resp);
@@ -38,8 +44,9 @@ public class AddRecipeServlet extends HttpServlet {
 
         HashMap<Ingredient, String> map = new HashMap();
         LinkedList<Ingredient> list = new LinkedList<>();
+//        LinkedList<Tag> tags = getListTags(req.getParameter("tags"));
         try {
-            putToMap(map, req);
+//            putToMap(map, req);
             addToList(list, req);
 
             if (title != null && description != null && !list.isEmpty()) {
@@ -55,6 +62,9 @@ public class AddRecipeServlet extends HttpServlet {
 
         }
     }
+
+//    private LinkedList<Tag> getListTags(String tags) {   }
+
 
     private void addToList(LinkedList<Ingredient> list, HttpServletRequest req) throws SQLException {
         ingDAO = new IngredientDAO();
@@ -83,5 +93,16 @@ public class AddRecipeServlet extends HttpServlet {
             amountIngTo = req.getParameter(amountIngFrom + i);
             map.put(ingredient, amountIngTo);
         }
+    }
+
+    private LinkedList<Tag> getAllTags() {
+        LinkedList<Tag> allTags;
+        try {
+            allTags = tagDAO.getAllTags();
+            tagDAO.destroy();
+        } catch (SQLException ex) {
+            allTags = null;
+        }
+        return allTags;
     }
 }
