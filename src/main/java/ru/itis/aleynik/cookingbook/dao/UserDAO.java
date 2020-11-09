@@ -108,7 +108,7 @@ public class UserDAO {
         return st.executeQuery().next();
     }
 
-    public boolean deleteFavRecipes(int id, int r_id) throws SQLException{
+    public boolean deleteFavRecipes(int id, int r_id) throws SQLException {
         String command = "DELETE FROM recipe WHERE r_id=? AND u_id=?";
         PreparedStatement st = conn.prepareStatement(command);
         st.setInt(2, id);

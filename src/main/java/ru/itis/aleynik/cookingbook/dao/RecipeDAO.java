@@ -116,6 +116,24 @@ public class RecipeDAO {
         return res;
     }
 
+    public boolean updateRecipeById(int r_id, String title, String description) throws SQLException {
+//        language=SQL
+        String command = "UPDATE recipe set title=?, description=? where r_id=?";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setString(1, title);
+        st.setString(2, description);
+        st.setInt(3, r_id);
+        return st.execute();
+    }
+
+    public boolean deleteRecipeById(int r_id) throws SQLException {
+//        language=SQL
+        String command = "DELETE FROM recipe WHERE r_id=?";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setInt(1, r_id);
+        return st.execute();
+    }
+
     private int getIdRecipeByTitle(String title) throws SQLException {
         String command = "SELECT r_id FROM recipe WHERE title LIKE ?";
         PreparedStatement st = conn.prepareStatement(command);
@@ -133,7 +151,7 @@ public class RecipeDAO {
         return getRecipeByResultSet(set);
     }
 
-    public LinkedList<Recipe> getListFavByUser(int id) throws SQLException{
+    public LinkedList<Recipe> getListFavByUser(int id) throws SQLException {
         LinkedList<Recipe> list = new LinkedList<>();
         String command = "SELECT r_id FROM userp_recipe WHERE u_id=?";
         PreparedStatement st = conn.prepareStatement(command);
@@ -151,33 +169,13 @@ public class RecipeDAO {
         PreparedStatement st = conn.prepareStatement(command);
         st.setInt(1, id);
         ResultSet set = st.executeQuery();
-        while(set.next()) {
+        while (set.next()) {
             list.add(getRecipeById(set.getInt("r_id")));
         }
         return list;
     }
 
-    public boolean updateRecipeById(int r_id, String title, String description) throws SQLException {
-//        language=SQL
-        String command = "UPDATE recipe set title=?, description=? where r_id=?";
-        PreparedStatement st = conn.prepareStatement(command);
-        st.setString(1, title);
-        st.setString(2, description);
-        st.setInt(3, r_id);
-        return st.execute();
-    }
-
-    public boolean deleteRecipeById(int r_id) throws SQLException{
-//        language=SQL
-        String command = "DELETE FROM recipe WHERE r_id=?";
-        PreparedStatement st = conn.prepareStatement(command);
-        st.setInt(1, r_id);
-        return st.execute();
-    }
-
-
-
-    public ArrayList<Integer> getAllId() throws SQLException{
+    public ArrayList<Integer> getAllId() throws SQLException {
 //        language=SQL
         ArrayList<Integer> id = new ArrayList<>();
         String command = "SELECT r_id FROM recipe";

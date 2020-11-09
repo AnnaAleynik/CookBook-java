@@ -81,6 +81,4 @@ public class TagDAO {
         Tag tag = getTagByResultSet(set);
         return tag;
     }
-
-
 }

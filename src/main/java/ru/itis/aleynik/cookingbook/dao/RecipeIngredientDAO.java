@@ -1,7 +1,6 @@
 package ru.itis.aleynik.cookingbook.dao;
 
 import ru.itis.aleynik.cookingbook.models.Ingredient;
-import ru.itis.aleynik.cookingbook.models.RecipeIngredient;
 import ru.itis.aleynik.cookingbook.services.DBWorker;
 
 import java.sql.Connection;
@@ -15,7 +14,7 @@ public class RecipeIngredientDAO {
     private Connection conn;
 
     public RecipeIngredientDAO() {
-        this.conn = DBWorker.getConn();;
+        this.conn = DBWorker.getConn();
     }
 
     public void destroy() throws SQLException {

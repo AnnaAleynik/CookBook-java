@@ -49,7 +49,7 @@ public class IngredientDAO {
         }
     }
 
-    public Ingredient getIngById(int i_id) throws SQLException{
+    public Ingredient getIngById(int i_id) throws SQLException {
         String command = "SELECT i_id, title from ingredient where id = ?";
         PreparedStatement st = conn.prepareStatement(command);
         st.setInt(1, i_id);

@@ -1,9 +1,11 @@
 package ru.itis.aleynik.cookingbook.models;
 
+import java.util.Objects;
+
 public class Ingredient {
 
-    public int i_id;
-    public String title;
+    private int i_id;
+    private String title;
     private String amount;
 
 
@@ -40,6 +42,21 @@ public class Ingredient {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ingredient)) return false;
+        Ingredient that = (Ingredient) o;
+        return i_id == that.i_id &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(amount, that.amount);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(i_id, title, amount);
     }
 
     @Override

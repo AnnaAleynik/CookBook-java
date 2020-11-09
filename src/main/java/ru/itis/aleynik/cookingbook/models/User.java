@@ -111,5 +111,12 @@ public class User {
         return Objects.hash(id, login, email, password, favoriteRecipes, addedRecipes);
     }
 
-//    public LinkedList<Integer> getFavoriteRecipesId() { }
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
 }

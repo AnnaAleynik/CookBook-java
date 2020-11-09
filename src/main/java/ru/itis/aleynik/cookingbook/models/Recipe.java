@@ -1,15 +1,16 @@
 package ru.itis.aleynik.cookingbook.models;
 
 import java.util.LinkedList;
+import java.util.Objects;
 
 public class Recipe {
 
-    public int r_id;
-    public String title;
-    public String description;
-    public User author;
-    public LinkedList<Ingredient> ingredients;
-    public LinkedList<Tag> tags;
+    private int r_id;
+    private String title;
+    private String description;
+    private User author;
+    private LinkedList<Ingredient> ingredients;
+    private LinkedList<Tag> tags;
 
     public Recipe() {
     }
@@ -75,6 +76,31 @@ public class Recipe {
 
     public void setTags(LinkedList<Tag> tags) {
         this.tags = tags;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Recipe)) return false;
+        Recipe recipe = (Recipe) o;
+        return r_id == recipe.r_id &&
+                Objects.equals(title, recipe.title) &&
+                Objects.equals(description, recipe.description) &&
+                Objects.equals(author, recipe.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(r_id, title, description, author);
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "r_id=" + r_id +
+                ", title='" + title + '\'' +
+                ", author=" + author +
+                '}';
     }
 }
 
