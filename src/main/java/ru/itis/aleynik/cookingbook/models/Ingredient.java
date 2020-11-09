@@ -18,11 +18,11 @@ public class Ingredient {
         this.amount = amount;
     }
 
-    public int getI_id() {
+    public int getId() {
         return i_id;
     }
 
-    public void setI_id(int i_id) {
+    public void setId(int i_id) {
         this.i_id = i_id;
     }
 
@@ -40,5 +40,10 @@ public class Ingredient {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    @Override
+    public String toString() {
+        return title;
     }
 }

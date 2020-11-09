@@ -31,9 +31,9 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">Рецепты</a>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Завтраки</a>
-                    <a class="dropdown-item" href="#">Обеды</a>
-                    <a class="dropdown-item" href="#">Десерты</a>
+                    <a class="dropdown-item" href="<c:url value="/recipes/list?t=1"/> ">Завтраки</a>
+                    <a class="dropdown-item" href="<c:url value="/recipes/list?t=14"/> ">Обеды</a>
+                    <a class="dropdown-item" href="<c:url value="/recipes/list?t=1"/> ">Ужины</a>
                 </div>
             </li>
             <li class="nav-item ">
@@ -55,12 +55,12 @@
             <a class="btn btn-outline-info ml-sm-1" href="<c:url value="/profile"/>">Профиль</a>
             <a class="btn btn-outline-info ml-sm-1" href="<c:url value="/logout"/>">Выйти</a>
         </c:if>
-        <li class="nav-item">
-            <form class="form-inline my-2 my-lg-0  ml-sm-2">
-                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-sm-0" type="submit">Найти в книге</button>
-            </form>
-        </li>
+<%--        <li class="nav-item">--%>
+<%--            <form class="form-inline my-2 my-lg-0  ml-sm-2">--%>
+<%--                <input class="form-control" type="search" placeholder="Search" aria-label="Search">--%>
+<%--                <button class="btn btn-outline-success my-sm-0" type="submit">Найти в книге</button>--%>
+<%--            </form>--%>
+<%--        </li>--%>
     </ul>
 </nav>
 

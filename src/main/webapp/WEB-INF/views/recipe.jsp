@@ -22,6 +22,9 @@
                     <c:if test="${!(user.getId() == recipe.getAuthor().getId()) && (user != null)}">
                         <%--                        <c:if test="${}">--%>
                         <div>
+                            <small><a href="<c:url value="/recipe/${recipe.getId()}/add-fav"/>">Добавить в избранное</a></small>
+                        </div>
+                        <div>
                             <small><a href="<c:url value="/recipe/${recipe.getId()}/delete-fav"/>">Удалить из
                                 избранного</a></small>
                         </div>

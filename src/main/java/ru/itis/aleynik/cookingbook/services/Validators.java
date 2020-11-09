@@ -15,28 +15,32 @@ public class Validators {
 
         if (!name.matches("[A-Za-z0-9_.]*")) {
             name = "null";
+//            System.out.println("name");
             nameB = false;
         }
 
         String password = req.getParameter("password");
         String password2 = req.getParameter("password2");
+//        System.out.println("pass: " + password + " pass2: " + password2);
 
         if (!password.equals(password2)) {
             password = "null";
+//            System.out.println("pass");
             passB = false;
         }
 
-        String mail = req.getParameter("mail");
+        String mail = req.getParameter("email");
         if (!mail.matches("[a-zA-Z\\-0-9\\.]+@([a-zA-Z\\-0-9]+\\.([a-z\\-])+)+")) {
+//            System.out.println("mail");
             mail = "null";
             mailB = false;
         }
 
         String accept = req.getParameter("accept");
 
-        if (accept.equals("on")) {
+        if (accept == null) {
             acceptB = false;
-            System.out.println(accept);
+//            System.out.println(accept);
 
         }
 
@@ -46,10 +50,11 @@ public class Validators {
             map.put("login", name);
             map.put("password", password);
             map.put("email", mail);
-            System.out.println(name + " " + password + " " + mail);
+//            System.out.println(name + " " + password + " " + mail);
         } else {
             map.put("accept", "0");
             map.put("help", accept);
+            System.out.println("jjjjj");
         }
 
         return map;

@@ -4,6 +4,12 @@
 
     <div class="container mt-md-4 bg-white">
 
+        <c:if test="${(error == null)}">
+            <div class="alert alert-danger" role="alert">
+                Неверные данные!
+            </div>
+        </c:if>
+
         <div class="form-input">
             <form action="" method="post">
                 <div class="form-group">
@@ -19,7 +25,7 @@
                            placeholder="Пароль">
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control col-3" name="password" id="password2"
+                    <input type="password" class="form-control col-3" name="password2" id="password2"
                            placeholder="Повторите пароль">
                 </div>
                 <div class="form-group">

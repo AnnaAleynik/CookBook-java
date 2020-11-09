@@ -4,6 +4,7 @@ create table userp
     login    varchar,
     password varchar,
     email    varchar,
+    salt     varchar,
     constraint user_email unique (email),
     constraint user_pk primary key (id)
 );

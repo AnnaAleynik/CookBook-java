@@ -13,6 +13,16 @@
                     <input type="text" class="form-control" name="title" value="<c:out value="${recipe.getTitle()}"/>">
                 </div>
 
+                <div>
+                    <a class="btn btn-outline-success btn-sm mt-2" href="<c:url value="/recipe/${recipe.getId()}/edit-ingredients"/>">Изменить ингредиенты</a>
+
+                    <ul class="list-group list-group-horizontal mb-2">
+                        <c:forEach var="item" items="${recipe.getTags()}">
+                            <li class="list-group-item mr-2">${item.getTitle()}</li>
+                        </c:forEach>
+                    </ul>
+                </div>
+
                 <div id="items">
 <%--                    <c:set var="amount" value="${0}"/>--%>
 <%--                    <c:set var="item" value="${0}"/>--%>

@@ -10,24 +10,31 @@ public class User {
 
     private static UserDAO userDAO;
 
-    public int id;
-    public String login;
-    public String email;
-    public String password;
-    public LinkedList<Recipe> favoriteRecipes;
-    public LinkedList<Recipe> addedRecipes;
+    private int id;
+    private String login;
+    private String email;
+    private String password;
+    private String salt;
+    private LinkedList<Recipe> favoriteRecipes;
+    private LinkedList<Recipe> addedRecipes;
 
     public static User userById(int id) throws SQLException {
         userDAO = new UserDAO();
         return userDAO.getUserById(id);
     }
 
+    public User(int id, String login, String email) {
+        this.id = id;
+        this.login = login;
+        this.email = email;
+    }
 
-    public User(int id, String login, String email, String password) {
+    public User(int id, String login, String email, String password, String salt) {
         this.id = id;
         this.login = login;
         this.email = email;
         this.password = password;
+        this.salt = salt;
     }
 
     public User(int id, String login, String email, String password, LinkedList<Recipe> favoriteRecipe, LinkedList<Recipe> addedRecipe) {
@@ -85,6 +92,10 @@ public class User {
 
     public LinkedList<Recipe> getAddedRecipes() {
         return addedRecipes;
+    }
+
+    public String getSalt() {
+        return salt;
     }
 
     @Override

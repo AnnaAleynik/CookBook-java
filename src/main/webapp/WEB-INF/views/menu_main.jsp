@@ -11,8 +11,8 @@
     </div>
     <div class="container">
         <div class="row justify-content-center">
-            <button type="button" class="btn btn-outline-info col-2 align-self-start mr-1 mb-2">по настроению</button>
-            <button type="button" class="btn btn-outline-info col-2 align-self-start ml-1 mb-2">по списку продуктов</button>
+            <a href="<c:url value="/recipes-tags"/>" class="btn btn-outline-info col-2 align-self-start mr-1 mb-2">по настроению</a>
+            <a href="<c:url value="/recipes-ingredients"/>" class="btn btn-outline-info col-2 align-self-start ml-1 mb-2">по списку продуктов</a>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <a href="<c:url value="/day-recipe"/>" class="btn btn-outline-info col-2 align-self-start mr-1 mb-2">рецепт дня</a>
-            <button type="button" class="btn btn-outline-info col-2 align-self-start ml-1 mb-2">меню дня</button>
+            <a href="<c:url value="/day-menu"/>" class="btn btn-outline-info col-2 align-self-start ml-1 mb-2">меню дня</a>
         </div>
     </div>
 

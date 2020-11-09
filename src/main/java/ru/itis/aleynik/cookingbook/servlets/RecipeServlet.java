@@ -58,8 +58,17 @@ public class RecipeServlet extends HttpServlet {
                         delete(req, resp, r_id);
                         break;
                     case "add-fav":
+                        addFav(req, r_id);
                         resp.sendRedirect(getServletContext().getContextPath() + "/recipe/" + r_id);
                         break;
+                    case "delete-fav":
+                        deleteFav(req, r_id);
+                        resp.sendRedirect(getServletContext().getContextPath() + "/recipe/" + r_id);
+                        break;
+                    case "edit-ingredients" :
+                        getServletContext().getRequestDispatcher("/WEB-INF/views/edit_ing.jsp").forward(req, resp);
+                        break;
+
                 }
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
@@ -71,6 +80,14 @@ public class RecipeServlet extends HttpServlet {
             req.getRequestDispatcher("/WEB-INF/views/error404.jsp").forward(req, resp);
         }
 
+    }
+
+    private boolean deleteFav(HttpServletRequest req, int r_id) throws SQLException{
+        UserDAO userDAO = new UserDAO();
+        User user = (User) req.getSession().getAttribute("user");
+        boolean res = userDAO.deleteFavRecipes(user.getId(), r_id);
+        userDAO.destroy();
+        return res;
     }
 
     private boolean addFav(HttpServletRequest req, int r_id) throws SQLException {

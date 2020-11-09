@@ -29,8 +29,6 @@ public class AddRecipeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         LinkedList<Tag> allTags = getAllTags();
         req.setAttribute("allTags", allTags);
-        req.setCharacterEncoding("utf8");
-        resp.setContentType("text/html; charset=UTF-8");
         req.getRequestDispatcher("/WEB-INF/views/add_recipe.jsp").forward(req, resp);
     }
 
@@ -44,16 +42,14 @@ public class AddRecipeServlet extends HttpServlet {
 
         HashMap<Ingredient, String> map = new HashMap();
         LinkedList<Ingredient> list = new LinkedList<>();
-//        LinkedList<Tag> tags = getListTags(req.getParameter("tags"));
         LinkedList<Tag> tags = new LinkedList<>();
         try {
-//            putToMap(map, req);
             addToList(list, req);
             addTags(tags, req);
 
             if (title != null && description != null && !list.isEmpty() && !tags.isEmpty()) {
 
-                int id = recipeDAO.addRecipe(user.id, title, description, list, tags);
+                int id = recipeDAO.addRecipe(user.getId(), title, description, list, tags);
                 recipeDAO.destroy();
 
                 req.getSession().setAttribute("recipe_id", id);
@@ -65,7 +61,7 @@ public class AddRecipeServlet extends HttpServlet {
         }
     }
 
-    private void addTags(LinkedList<Tag> tags, HttpServletRequest req) throws SQLException{
+    private void addTags(LinkedList<Tag> tags, HttpServletRequest req) throws SQLException {
         tagDAO = new TagDAO();
         int amountTag = Integer.parseInt(req.getParameter("amountTag"));
         String tagStr = "tag";
@@ -77,9 +73,6 @@ public class AddRecipeServlet extends HttpServlet {
         }
         tagDAO.destroy();
     }
-
-//    private LinkedList<Tag> getListTags(String tags) {   }
-
 
     private void addToList(LinkedList<Ingredient> list, HttpServletRequest req) throws SQLException {
         ingDAO = new IngredientDAO();

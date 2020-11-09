@@ -36,7 +36,7 @@ public class TagDAO {
         }
     }
 
-    public LinkedList<Tag> listTagsByRecipe(int id) throws SQLException{
+    public LinkedList<Tag> listTagsByRecipe(int id) throws SQLException {
         String command = "select t.title, t.t_id from recipe_tag rt join tag t on rt.t_id=t.t_id  where r_id = ?";
         PreparedStatement st = conn.prepareStatement(command);
         st.setInt(1, id);
@@ -44,8 +44,7 @@ public class TagDAO {
         return getListByResultSet(set);
     }
 
-    public LinkedList<Tag> getAllTags() throws SQLException{
-//        language=SQL
+    public LinkedList<Tag> getAllTags() throws SQLException {
         String command = "SELECT t_id, title FROM tag";
         PreparedStatement st = conn.prepareStatement(command);
         ResultSet set = st.executeQuery();
@@ -54,7 +53,7 @@ public class TagDAO {
 
     private LinkedList<Tag> getListByResultSet(ResultSet set) throws SQLException {
         LinkedList<Tag> list = new LinkedList<>();
-        while(set.next()) {
+        while (set.next()) {
             list.add(new Tag(
                     set.getInt("t_id"),
                     set.getString("title")
@@ -73,4 +72,15 @@ public class TagDAO {
             return null;
         }
     }
+
+    public Tag getTagById(Integer tagId) throws SQLException {
+        String command = "SELECT t_id, title FROM tag where t_id = ?";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setInt(1, tagId);
+        ResultSet set = st.executeQuery();
+        Tag tag = getTagByResultSet(set);
+        return tag;
+    }
+
+
 }

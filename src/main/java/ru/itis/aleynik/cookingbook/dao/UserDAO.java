@@ -21,14 +21,15 @@ public class UserDAO {
         conn.close();
     }
 
-    public int addUser(String login, String password, String email) throws SQLException {
+    public int addUser(String login, String password, String email, String salt) throws SQLException {
 //        String command = "INSERT INTO Users (login, password, email) VALUES (?, ?, ?)";
-        String command = "INSERT INTO userp (login, password, email) VALUES (?, ?, ?)";
+        String command = "INSERT INTO userp (login, password, email, salt) VALUES (?, ?, ?, ?)";
 
         PreparedStatement st = conn.prepareStatement(command);
         st.setString(1, login);
         st.setString(2, password);
         st.setString(3, email);
+        st.setString(4, salt);
         return st.executeUpdate();
     }
 
@@ -39,10 +40,12 @@ public class UserDAO {
                     set.getInt("id"),
                     set.getString("login"),
                     set.getString("email"),
-                    set.getString("password")
+                    set.getString("password"),
+                    set.getString("salt")
             );
         } else {
-            user = new User(-1, null, null, null);
+//            user = new User(-1, null, null, null, n);
+            user = null;
         }
 
 //        addRecipes(user);
@@ -58,8 +61,8 @@ public class UserDAO {
 
     public void addRecipes(User user) throws SQLException {
         recipeDAO = new RecipeDAO();
-        user.setFavoriteRecipes(recipeDAO.getListFavByUser(user.id));
-        user.setAddedRecipes(recipeDAO.getListAddedByUser(user.id));
+        user.setFavoriteRecipes(recipeDAO.getListFavByUser(user.getId()));
+        user.setAddedRecipes(recipeDAO.getListAddedByUser(user.getId()));
         recipeDAO.destroy();
     }
 
@@ -103,5 +106,14 @@ public class UserDAO {
         st.setInt(2, r_id);
 
         return st.executeQuery().next();
+    }
+
+    public boolean deleteFavRecipes(int id, int r_id) throws SQLException{
+        String command = "DELETE FROM recipe WHERE r_id=? AND u_id=?";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setInt(2, id);
+        st.setInt(1, r_id);
+
+        return st.execute();
     }
 }

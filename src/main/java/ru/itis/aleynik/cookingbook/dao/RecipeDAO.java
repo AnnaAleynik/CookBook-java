@@ -109,31 +109,12 @@ public class RecipeDAO {
             command = "INSERT INTO recipe_ingr (r_id, i_id, amount) VALUES (?, ?, ?)";
             st = conn.prepareStatement(command);
             st.setInt(1, r_id);
-            st.setInt(2, item.getI_id());
+            st.setInt(2, item.getId());
             st.setString(3, item.getAmount());
             res += st.executeUpdate();
         }
         return res;
     }
-
-    /*
-    public int addRecipeIngredient(int r_id, HashMap<Ingredient, String> map) throws SQLException {
-        String command;
-        PreparedStatement st;
-        Set<Ingredient> set = map.keySet();
-        int res = 0;
-        for (Ingredient item: set) {
-            command = "INSERT INTO recipe_ingr (r_id, i_id, amount) VALUES (?, ?, ?)";
-            st = conn.prepareStatement(command);
-            st.setInt(1, r_id);
-            st.setInt(2, item.i_id);
-            st.setString(3, map.get(item));
-            res += st.executeUpdate();
-        }
-//        map.forEach((k,v) -> );
-        return res;
-    }
-*/
 
     private int getIdRecipeByTitle(String title) throws SQLException {
         String command = "SELECT r_id FROM recipe WHERE title LIKE ?";
@@ -194,6 +175,8 @@ public class RecipeDAO {
         return st.execute();
     }
 
+
+
     public ArrayList<Integer> getAllId() throws SQLException{
 //        language=SQL
         ArrayList<Integer> id = new ArrayList<>();
@@ -215,5 +198,14 @@ public class RecipeDAO {
             return set.getInt("r_id");
         }
         return -1;
+    }
+
+    public Recipe getRandRecipeByTag(Tag tag) throws SQLException {
+        String command = "SELECT r.r_id, r.title, r.description, r.user_id FROM recipe r JOIN recipe_tag rt on r.r_id = rt.r_id  WHERE rt.t_id = ? ORDER BY random() limit 1";
+        PreparedStatement st = conn.prepareStatement(command);
+        st.setInt(1, tag.getId());
+        ResultSet set = st.executeQuery();
+        return getRecipeByResultSet(set);
+
     }
 }
