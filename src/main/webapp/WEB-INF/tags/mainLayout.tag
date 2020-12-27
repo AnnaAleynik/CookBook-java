@@ -33,7 +33,7 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="<c:url value="/recipes/list?t=1"/> ">Завтраки</a>
                     <a class="dropdown-item" href="<c:url value="/recipes/list?t=14"/> ">Обеды</a>
-                    <a class="dropdown-item" href="<c:url value="/recipes/list?t=1"/> ">Ужины</a>
+                    <a class="dropdown-item" href="<c:url value="/recipes/list?t=4"/> ">Ужины</a>
                 </div>
             </li>
             <li class="nav-item ">
